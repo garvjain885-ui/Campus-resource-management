@@ -1,0 +1,583 @@
+/* Targetting Header Bar and Sidebar */
+html, body{
+  height: 100vh;
+  /* width: 100vw; */
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: Inter, sans-serif;
+  background-color: black;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(70, 70, 70);
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+p{
+  color: white;
+  font-family: 'Inter Tight', sans-serif;
+}
+
+.hidden { display: none !important; }
+
+.header-bar{
+  display: flex;
+  height: 2em;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  padding: 1em 1em;
+  margin: 0;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+  transition: backdrop-filter 0.2s;
+  position: sticky;
+  top: 0px;
+  border-bottom: 1px solid rgb(44, 44, 44);
+  z-index: 100;
+}
+
+.header-bar:hover{
+  backdrop-filter: blur(8px);
+}
+
+.header-box-1,
+.header-box-2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
+.resmanager-heading{
+  color: white;
+  font-size: 1.25em;
+}
+
+.sidebar-toggle,
+.profile-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  height: 2.5em;
+  width: 2.5em;
+  padding: 0;
+  border-radius: 0.5em;
+  transition: background-color 0.2s;
+}
+
+.profile-button{
+  border-radius: 50%;
+}
+
+.profile-button.active{
+  background-color: rgb(44, 44, 44);
+}
+
+.sidebar-toggle:hover,
+.profile-button:hover{
+  background-color: rgb(44, 44, 44);
+}
+
+.sidebar-toggle:active,
+.profile-button:active{
+  background-color: rgb(65, 65, 65);
+}
+
+.profile-container{
+  position: relative;
+}
+
+.profile-dropdown{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  background-color: rgb(20, 20, 20);
+  border: 0.5px solid rgb(60, 60, 60);
+  border-radius: 6px;
+  padding: 0.25em;
+  font-size: 1em;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+}
+
+.profile-dropdown.open{
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-link,
+.signout-button{
+  background-color: rgb(20, 20, 20);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.15rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.profile-link:hover,
+.signout-button:hover{
+  background-color: rgb(45, 45, 45);
+}
+
+.profile-link:active,
+.signout-button:active{
+  background-color: rgb(65, 65, 65);
+}
+
+.username{
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.page-content {
+  margin-left: 200px;   /* match sidebar's expanded width */
+  transition: margin-left 0.25s ease;
+  padding: 2em 3em;
+}
+
+.sidebar ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  width: 100%;
+}
+
+.sidebar{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+  top: 4em;
+  left: 0;
+  height: calc(100vh - 4em); /* oeprator needs spaces around it */
+  background-color: black;
+  border-right: 1px solid rgb(44, 44, 44);
+  padding: 1.5em 0.75em;
+  width: 164px;
+  transition: width 0.25s ease;
+  justify-content: space-between;
+  z-index: 101;
+}
+
+.sidebar-links{
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25em;
+  width: 100%;
+  background-color: black;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5em 0.75em;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.sidebar-links svg {
+  flex-shrink: 0;
+}
+
+.sidebar-links:hover{
+  background-color: rgb(44, 44, 44);
+}
+
+.sidebar-links:active{
+  background-color: rgb(65, 65, 65);
+}
+
+.sidebar-links span{
+  opacity: 1;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, max-width 0.25s ease;
+}
+
+.sidebar.collapsed{
+  width: 60px;
+}
+
+.page-content.sidebar-collapsed {
+  margin-left: 72px;   /* match sidebar's collapsed width */
+}
+
+.sidebar.collapsed .sidebar-links span{
+  opacity: 0;
+  max-width: 0;
+}
+
+.sidebar.collapsed .sidebar-links {
+  padding: 0.5em 0.375em;
+}
+
+.hidden{
+  display: none;
+}
+
+/* Access gate */
+.access-denied-card {
+  display: none;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid rgb(44, 44, 44);
+  border-radius: 0.75em;
+  padding: 1.5em 2em;
+  margin-bottom: 2.5em;
+}
+
+.access-denied-card p {
+  color: rgb(170, 170, 170);
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+}
+
+.sidebar li.active-sidebar-link .sidebar-links {
+  background-color: rgb(28, 28, 28);
+}
+
+.sidebar-credit {
+  font-size: 0.8em;
+  color: rgb(148, 148, 148);
+  padding: 0 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .sidebar-credit {
+  opacity: 0;
+}
+
+/* Resources & Bookings Cards CSS */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+  gap: 1.5em;
+}
+
+.resource-card {
+  background-color: rgb(20, 20, 20);
+  border: 1px solid rgb(44, 44, 44);
+  border-radius: 0.75em;
+  padding: 1.5em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-0.25em);
+  box-shadow: 0 0 1.5em rgba(0, 160, 255, 0.25);
+  border-color: white;
+}
+
+.resource-card h3 {
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+.resource-card p {
+  font-size: 0.95em;
+  margin: 0.2em 0;
+}
+
+.status-tag {
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.2em 0.6em;
+  border-radius: 0.4em;
+  margin: 0.5em 0;
+}
+
+.status-available { background-color: rgba(0, 200, 100, 0.2); color: rgb(0, 220, 120); }
+.status-unavailable { background-color: rgba(220, 50, 50, 0.2); color: rgb(240, 80, 80); }
+.status-maintenance { background-color: rgba(230, 160, 0, 0.2); color: rgb(250, 180, 40); }
+
+/* Complaint & booking status tags */
+.status-pending   { background-color: rgba(230, 160, 0, 0.2);  color: rgb(250, 180, 40); }
+.status-resolved  { background-color: rgba(0, 200, 100, 0.2);  color: rgb(0, 220, 120); }
+.status-approved  { background-color: rgba(0, 200, 100, 0.2);  color: rgb(0, 220, 120); }
+.status-rejected  { background-color: rgba(220, 50, 50, 0.2);  color: rgb(240, 80, 80); }
+.status-cancelled { background-color: rgba(140, 140, 140, 0.2); color: rgb(180, 180, 180); }
+
+.view-details-link {
+  display: inline-block;
+  margin-top: 0.5em;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+}
+
+.view-details-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  width: 0;
+  height: 0.1em;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.view-details-link:hover::after {
+  width: 100%;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: rgb(20, 20, 20);
+  border: 1px solid rgb(44, 44, 44);
+  border-radius: 1em;
+  padding: 2em;
+  width: 90%;
+  max-width: 28em;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal h2 {
+  color: white;
+}
+
+.modal-overlay.open .modal {
+  transform: scale(1);
+}
+
+#validation-modal-overlay {
+  z-index: 200;   /* higher than other modals' default stacking */
+}
+
+.validation-modal {
+  max-width: 16em;
+  padding: 1.5em;
+  text-align: center;
+}
+
+.validation-modal p {
+  color: white;
+  margin: 0.5em 0 1.5em 0;
+  font-size: 0.95em;
+  padding-right: 1.5em;
+}
+
+.validation-modal .book-button {
+  padding: 0.5em;
+  font-size: 0.9em;
+}
+.slot-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.slot-dropdown-toggle {
+  background-color: rgb(30, 30, 30);
+  border: 1px solid rgb(60, 60, 60);
+  border-radius: 0.4em;
+  color: white;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+}
+
+.slot-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5em;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid rgb(60, 60, 60);
+  border-radius: 0.5em;
+  padding: 0.75em;
+  width: 14em;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.slot-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slot-dropdown-hint {
+  font-size: 0.85em;
+  color: rgb(170, 170, 170);
+  margin: 0 0 0.5em 0;
+}
+
+.slot-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4em;
+  max-height: 12em;
+  overflow-y: auto;
+}
+
+.slot-option {
+  background-color: rgb(30, 30, 30);
+  border: 1px solid rgb(60, 60, 60);
+  border-radius: 0.4em;
+  color: white;
+  font-size: 0.85em;
+  padding: 0.4em;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.slot-option.selected {
+  background-color: rgb(0, 120, 212);
+  border-color: rgb(0, 120, 212);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.modal-detail-row {
+  margin: 0.6em 0;
+  color: rgb(220, 220, 220);
+}
+
+.detail-label {
+  color: rgb(170, 170, 170);
+  font-weight: 600;
+}
+
+.book-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgb(60, 60, 60);
+}
+
+.book-button:hover:not(:disabled) {
+  background-color: rgb(20, 140, 230);
+}
+
+.book-button {
+  margin-top: 1.5em;
+  width: 100%;
+  padding: 0.75em;
+  background-color: rgb(0, 120, 212);
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.book-button:hover {
+  background-color: rgb(20, 140, 230);
+}
+
+.slot-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.slot-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slot-options::-webkit-scrollbar-thumb {
+  background-color: rgb(70, 70, 70);
+  border-radius: 3px;
+}
+
+.slot-options::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+.access-toast {
+  position: fixed;
+  top: 4.5em;
+  right: 1.5em;
+  z-index: 1000;
+  max-width: 22em;
+  background-color: rgb(30, 30, 30);
+  border: 1px solid rgb(240, 80, 80);
+  border-radius: 0.6em;
+  color: white;
+  padding: 0.9em 1.2em;
+  font-family: 'Inter Tight', sans-serif;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.5s;
+}
+.access-toast-hide { opacity: 0; }

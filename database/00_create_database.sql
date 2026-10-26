@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS resmanager CHARACTER SET utf8mb4;
+
+USE resmanager;
